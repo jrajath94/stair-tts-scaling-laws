@@ -1,0 +1,92 @@
+project:
+  name: "tts-scaling-laws"
+  mode: "full-auto"
+
+research:
+  topic: >
+    Information-Theoretic Bounds on Test-Time Compute Scaling Laws:
+    When Does Thinking More Help? We derive information-theoretic bounds on the
+    marginal utility of test-time compute by modeling chain-of-thought generation
+    as an iterative channel coding problem. We prove that for tasks with bounded
+    Kolmogorov complexity, the mutual information between extended reasoning traces
+    and correct solutions follows a log-concave scaling curve, yielding the first
+    provable diminishing-returns characterization. We validate our bounds empirically
+    across arithmetic, logic, and coding tasks, showing they predict the elbow point
+    where additional test-time compute stops helping within 15% accuracy. This bridges
+    information theory and practical inference scaling for LLM reasoning.
+  domains:
+    - "machine-learning"
+    - "information-theory"
+    - "large-language-models"
+  daily_paper_count: 15
+  quality_threshold: 4.0
+
+runtime:
+  timezone: "America/New_York"
+  max_parallel_tasks: 3
+  approval_timeout_hours: 12
+  retry_limit: 3
+
+notifications:
+  channel: "console"
+  target: ""
+  on_stage_start: true
+  on_stage_fail: true
+  on_gate_required: true
+
+knowledge_base:
+  backend: "markdown"
+  root: "docs/kb"
+
+openclaw_bridge:
+  use_cron: false
+  use_message: false
+  use_memory: false
+  use_sessions_spawn: false
+  use_web_fetch: false
+  use_browser: false
+
+llm:
+  provider: "acp"
+  primary_model: "claude"
+  fallback_models: []
+
+  acp:
+    agent: "claude"
+    session_name: "researchclaw-tts-paper"
+    timeout_sec: 1800
+
+security:
+  hitl_required_stages: []
+  allow_publish_without_approval: true
+  redact_sensitive_logs: true
+
+experiment:
+  mode: "simulated"
+  time_budget_sec: 600
+  max_iterations: 5
+  metric_key: "primary_metric"
+  metric_direction: "minimize"
+  sandbox:
+    python_path: ".venv/bin/python3"
+    gpu_required: false
+    max_memory_mb: 4096
+  opencode:
+    enabled: false
+
+  figure_agent:
+    enabled: true
+    min_figures: 3
+    max_figures: 8
+    max_iterations: 3
+    render_timeout_sec: 30
+    output_format: "python"
+    nano_banana_enabled: false
+    strict_mode: false
+    dpi: 300
+
+prompts:
+  custom_file: ""
+
+metaclaw_bridge:
+  enabled: false

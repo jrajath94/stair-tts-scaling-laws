@@ -1,0 +1,149 @@
+# =============================================================================
+# .gitignore for STAIR research repository
+# Goal: never commit build artifacts, secrets, OS metadata, or data we cannot
+# legally redistribute. Be strict about it.
+# =============================================================================
+
+# ── Python ─────────────────────────────────────────────────────────────────
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+.tox/
+.coverage
+.coverage.*
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+htmlcov/
+.python-version
+pip-log.txt
+pip-delete-this-directory.txt
+
+# ── Virtual environments ───────────────────────────────────────────────────
+.venv/
+venv/
+env/
+ENV/
+.env
+
+# ── Jupyter ────────────────────────────────────────────────────────────────
+.ipynb_checkpoints/
+*.ipynb
+
+# ── LaTeX build artifacts ──────────────────────────────────────────────────
+*.aux
+*.bbl
+*.blg
+*.brf
+*.fdb_latexmk
+*.fls
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.nav
+*.out
+*.snm
+*.synctex.gz
+*.synctex(busy)
+*.toc
+*.vrb
+*.dvi
+*.ps
+*.bcf
+*.run.xml
+*.xdv
+texput.log
+
+# ── OS metadata ────────────────────────────────────────────────────────────
+.DS_Store
+._.DS_Store
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# ── Editors / IDEs ─────────────────────────────────────────────────────────
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.project
+.pydevproject
+.settings/
+
+# ── Secrets — NEVER commit ─────────────────────────────────────────────────
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.cert
+*credentials*
+*api_key*
+*api-key*
+*.token
+*token*.json
+secrets.yaml
+secrets.yml
+secrets.json
+.netrc
+.ssh/
+
+# ── Cloud / ML config (project-specific) ───────────────────────────────────
+*.tfvars
+terraform.tfstate*
+.terraform/
+
+# ── Model weights / large binaries (use Git LFS or external storage) ───────
+*.bin
+*.safetensors
+*.pth
+*.pt
+*.ckpt
+*.h5
+*.onnx
+*.tflite
+# Allow small .npy fixtures in data/, but reject anything > 50MB through pre-commit hook
+
+# ── Pipeline state (private process metadata) ──────────────────────────────
+artifacts/
+heartbeat.json
+checkpoint.json
+pipeline_summary.json
+stage-*/
+
+# ── Local logs and scratch ─────────────────────────────────────────────────
+*.log
+logs/
+tmp/
+.tmp/
+scratch/
+work/
+out/
+output/
+local_*
+
+# ── Review-cycle artifacts (private) ───────────────────────────────────────
+REVIEW_TOKEN.txt
+paperreview
+paperreview.txt
+*_review.md
+review_*.md
+
+# ── Build PDFs in latex/ (we ship a curated paper/STAIR_paper.pdf) ─────────
+latex/main.pdf
+
+# ── Misc ───────────────────────────────────────────────────────────────────
+*.bak
+*.orig
+.cache/
