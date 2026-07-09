@@ -1,6 +1,6 @@
 # STAIR: Per-Problem Discrete Structure in Test-Time Compute Scaling for LLM Reasoning
 
-Companion repository for the NeurIPS 2025 submission **STAIR** (Staircase Test-time Adaptive Inference Routing).
+Companion repository for the research manuscript **STAIR** (Staircase Test-time Adaptive Inference Routing).
 
 **Paper**: [`paper/STAIR_paper.pdf`](paper/STAIR_paper.pdf)
 
@@ -166,7 +166,7 @@ If you use this work, please cite:
   author    = {Anonymous},
   booktitle = {Advances in Neural Information Processing Systems (NeurIPS)},
   year      = {2025},
-  note      = {Submission}
+  note      = {Independent research manuscript}
 }
 ```
 
