@@ -124,7 +124,7 @@ Fallback: last integer in the response. Ground truth: integer after `####` in th
 python src/main.py
 ```
 
-The synthetic reasoning channel (`src/data.py`) is fully deterministic at base seed 42. Default config: 800 problems × 5 seeds × 8 budgets × 3 temperatures × 32 samples. Runs entirely on CPU in under 10 minutes.
+The synthetic reasoning channel (`src/data.py`) is fully deterministic at base seed 42. Default config: 800 problems × 5 seeds × 8 budgets × 3 temperatures × 32 samples. Runs entirely on CPU.
 
 ---
 
