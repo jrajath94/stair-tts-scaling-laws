@@ -150,7 +150,7 @@ We resample **problems** (not (problem, temperature) pairs) so that the three te
 
 ### 4. Pareto split
 
-The 100 GSM8K problems are stratified-split 80/20 within each gzip tercile (seed 42). Per-bucket temperatures are calibrated on the 80% calibration set; all reported Pareto numbers are on the held-out 20% (60 problems). Significance: paired Wilcoxon signed-rank test, problem-level pairing.
+The 100 GSM8K problems are stratified-split 80/20 within each gzip tercile (seed 42). Per-bucket temperatures are calibrated on the 80% calibration set; all reported Pareto numbers are on the held-out 20% (20 problems). Significance: paired Wilcoxon signed-rank test, problem-level pairing.
 
 ---
 
