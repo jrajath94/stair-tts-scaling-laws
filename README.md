@@ -12,7 +12,7 @@ Test-time compute scaling for LLM reasoning is widely modeled as a **smooth, mon
 
 1. **97.7–99.3%** of per-problem accuracy curves are better fit by **piecewise-constant staircases** than smooth sigmoids under both MSE-based and binomial-likelihood BIC. Restricted to the variation subset (curves with accuracy range above the sampling floor), the rate is still **87.3–93.1%** with 95% bootstrap CIs above 0.6.
 2. **5.3–8.7%** of (problem, temperature) cells show empirical-accuracy non-monotonicity, attributable to budget-level answer truncation. We do **not** claim DPI violations — empirical accuracy is not mutual information.
-3. **Computational depth ≠ description length**: circuit depth predicts synthetic elbows at *ρ = 0.96* vs *0.38* for gzip; on real GSM8K, neither proxy predicts the elbow at the small-model accuracy floor (the predicted dissociation).
+3. **Computational depth ≠ description length**: on real GSM8K, neither circuit depth nor gzip compression predict the elbow at the small-model accuracy floor, indicating a systematic dissociation between text structure and scaling behavior.
 4. The **STAIR allocator** uses an *O(n)* gzip proxy plus pre-calibrated per-bucket temperatures and matches fixed-budget-512 accuracy on Qwen-1.5B at **75% lower token cost** (paired Wilcoxon *p* = 0.23), while beating a confidence-adaptive stopping baseline by **2.6× in accuracy** at 1.6× the cost.
 
 A theorem (Theorem 1 in the paper) reconciles discrete per-problem scaling with smooth population curves under log-concave critical-depth distributions.
@@ -77,16 +77,17 @@ This regenerates `results/reanalysis_stratified.json`, which contains every numb
 |---|---|---|
 | MSE-BIC overall, Qwen-0.5B | `real_llm_stratified."Qwen2.5-0.5B".overall.mse_rate` | 0.993 |
 | Bootstrap CI | `…overall.ci_mse` | [0.983, 1.000] |
-| Variation-subset rate, τ=0.5 | `…with_variation.mse_rate` (filtered) | 0.846 |
-| Non-monotonicity rate | `…overall.nm_rate` | 0.053 |
-| Cross-model divergence (overall) | `cross_model_divergence.overall_mean` | 0.244 |
-| Cross-model divergence (variation subset) | `cross_model_divergence.variation_subset_mean` | 0.506 |
+| Variation-subset rate, Qwen-0.5B | `…with_variation.mse_rate` | 0.931 |
+| Variation-subset rate, Qwen-1.5B | `…with_variation.mse_rate` | 0.873 |
+| Non-monotonicity rate, Qwen-0.5B | `…overall.nm_rate` | 0.053 |
+| Cross-model divergence (overall) | `cross_model.elbow_divergence_all_problems.mean` | 0.244 |
+| Cross-model divergence (variation subset) | `cross_model.elbow_divergence_variation_subset.mean` | 0.506 |
 
 The deterministic seed (`42`) and bootstrap iterations (`B = 2000`) are hard-coded; rerunning produces byte-identical JSON.
 
 ---
 
-## Reproducing the real-LLM inference (optional, ~$1 of compute)
+## Reproducing the real-LLM inference (optional)
 
 The `.npy` files in `data/` contain the raw 24,000 inference outcomes. To regenerate them from scratch:
 
@@ -103,8 +104,6 @@ python src/experiment/real_experiment.py
 - Temperatures: `{0.1, 0.5, 1.0}`
 - Samples per cell: `S = 8`
 - Total: 100 × 5 × 3 × 8 × 2 = 24,000 forward passes
-- Wall time: ≈ 3.5 hours on RTX A5000
-- Cost: < $1.00 on commodity cloud GPU
 
 **Prompt template** (verbatim):
 ```
