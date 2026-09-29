@@ -11,7 +11,7 @@ Companion repository for the research manuscript **STAIR** (Staircase Test-time 
 Test-time compute scaling for LLM reasoning is widely modeled as a **smooth, monotonic, task-determined** curve. We test all three assumptions on real LLMs (Qwen2.5-0.5B/1.5B on 100 GSM8K problems, 24,000 inference calls) and show:
 
 1. **97.7–99.3%** of per-problem accuracy curves are better fit by **piecewise-constant staircases** than smooth sigmoids under both MSE-based and binomial-likelihood BIC. Restricted to the variation subset (curves with accuracy range above the sampling floor), the rate is still **87.3–93.1%** with 95% bootstrap CIs above 0.6.
-2. **5.3–8.7%** of (problem, temperature) cells show empirical-accuracy non-monotonicity, attributable to budget-level answer truncation. We do **not** claim DPI violations — empirical accuracy is not mutual information.
+2. **5.3–8.7%** of (problem, temperature) cells show empirical-accuracy non-monotonicity, attributable to budget-level answer truncation. We do **not** claim DPI violations - empirical accuracy is not mutual information.
 3. **Computational depth ≠ description length**: on real GSM8K, neither circuit depth nor gzip compression predict the elbow at the small-model accuracy floor, indicating a systematic dissociation between text structure and scaling behavior.
 4. The **STAIR allocator** uses an *O(n)* gzip proxy plus pre-calibrated per-bucket temperatures and matches fixed-budget-512 accuracy on Qwen-1.5B at **75% lower token cost** (paired Wilcoxon *p* = 0.23), while beating a confidence-adaptive stopping baseline by **2.6× in accuracy** at 1.6× the cost.
 
@@ -99,7 +99,7 @@ python src/experiment/real_experiment.py
 
 **Configuration** (single source of truth in `src/config.py`):
 - Models: `Qwen2.5-0.5B-Instruct`, `Qwen2.5-1.5B-Instruct` (Apache 2.0)
-- Benchmark: GSM8K test split, first 100 problems by index (no cherry-picking) — MIT license
+- Benchmark: GSM8K test split, first 100 problems by index (no cherry-picking) - MIT license
 - Token budgets: `{32, 64, 128, 256, 512}`
 - Temperatures: `{0.1, 0.5, 1.0}`
 - Samples per cell: `S = 8`
@@ -142,7 +142,7 @@ Both yield staircase win rates well above 0.55 (the pre-registered threshold); b
 
 ### 2. Variation subset stratification
 
-At small-model accuracy, many curves are flat at zero. On flat curves the staircase model wins by parsimony alone — the finding is uninformative. We therefore stratify into the **variation subset**: curves whose accuracy range exceeds the sampling floor 1/*S* = 0.125. Headline numbers report both strata.
+At small-model accuracy, many curves are flat at zero. On flat curves the staircase model wins by parsimony alone - the finding is uninformative. We therefore stratify into the **variation subset**: curves whose accuracy range exceeds the sampling floor 1/*S* = 0.125. Headline numbers report both strata.
 
 ### 3. Cluster bootstrap
 
@@ -182,7 +182,7 @@ If you use this work, please cite:
 
 ## Limitations (in plain English)
 
-- Both Qwen2.5 models score < 7% on GSM8K — most curves are flat at zero, which is why we report variation-subset rates separately. Validation at 7B–70B+ is the most important follow-up.
+- Both Qwen2.5 models score < 7% on GSM8K - most curves are flat at zero, which is why we report variation-subset rates separately. Validation at 7B–70B+ is the most important follow-up.
 - GSM8K is arithmetic only; step counts span just `{2, …, 7}`. Wider depth distributions (code, logic, open-ended) would tighten the complexity-proxy diagnostic.
 - Five budget points limit BIC's resolution; 10–20 points would tighten the variation-subset CIs.
 - The deployed allocator uses gzip as a *proxy for circuit depth*; circuit depth itself requires ground-truth solution structure. Learned circuit-depth estimators are open work.
@@ -194,7 +194,7 @@ See §8 of the paper for the full enumeration.
 
 ## Open issues / contributions
 
-This repository is a research artifact accompanying a paper submission. PRs, issues, and replications are welcome — particularly:
+This repository is a research artifact accompanying a paper submission. PRs, issues, and replications are welcome - particularly:
 
 1. Reproductions on larger Qwen, Llama, or Mistral checkpoints.
 2. Extensions to code (HumanEval), logic (FOLIO), or open-ended benchmarks.
